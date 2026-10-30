@@ -1,10 +1,27 @@
-nums=[1,2,3,4,5,6,4]
-target=7
-res=[]
-for i in range(len(nums)):
-    for x in range(i+1,len(nums)):
-        if nums[i]+nums[x]==target:
-            if [nums[i], nums[x]] not in res and [nums[x], nums[i]] not in res:
-                res.append([nums[i], nums[x]])
-for s in res:
-    print(s)
+text=input().replace(",", "").replace(".", "").replace("—", "").lower()
+words=text.split()
+print(f"всего слов: {len(words)} ,из них уникальных: {len(set(words))}")
+counts={}
+for w in words:
+    if w in counts:
+      counts[w]+=1
+    else:
+      counts[w]=1
+top=sorted(counts,key=counts.get,reverse=True)[:5]
+print("топ-5 слов:",", ".join(f"{w} ({counts[w]})" for w in top))
+maxlen=0
+for w in words:
+    if len(w)>maxlen:
+        maxlen=len(w)
+longwords=[]
+for w in words:
+    if len(w)==maxlen and w not in longwords:
+        longwords.append(w)
+print("самое длинное слово:",", ".join(longwords))
+lengths={}
+for w in words:
+    if len(w) in lengths:
+        lengths[len(w)]+=1
+    else:
+        lengths[len(w)]=1
+print("слова по длинам:",lengths)
